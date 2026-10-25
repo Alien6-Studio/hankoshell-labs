@@ -20,6 +20,7 @@ are undergoing hosted verification and are not yet promoted on hanko.sh.
 | [Inventory and recovery](inventory/) — preview | Dry-run/Observe import, locally approved configuration snapshot and controller restart. |
 | [Workload identity](workload/) — preview | Cluster-bound trust, native federated authentication, kubelet-projected assertions and wrong-subject rejection. |
 | [Safety boundaries](guardrails/) — preview | Lifecycle dry runs and approval, theme image-trust refusal, Hub/mesh prerequisites and deprecated messaging. |
+| [Secure metrics](metrics/) — preview | TLS 1.3, exact SPIFFE client identity, anonymous/wrong-identity rejection and listener shutdown. |
 
 Together these scenarios address all 17 CRD surfaces. This is **not complete
 end-to-end coverage of every feature**: the last module deliberately demonstrates

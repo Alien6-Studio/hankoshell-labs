@@ -1,0 +1,47 @@
+{
+  "title": "Secure operator metrics",
+  "description": "Preview. Enable mutual TLS, prove exact-client and anonymous refusal, then disable the metrics listener.",
+  "details": {
+    "intro": {
+      "text": "intro.md",
+      "background": "background.sh",
+      "foreground": "foreground.sh"
+    },
+    "steps": [
+      {
+        "title": "Inspect the disabled default",
+        "text": "default/text.md",
+        "verify": "default/verify.sh"
+      },
+      {
+        "title": "Enable verified mutual TLS",
+        "text": "enable/text.md",
+        "verify": "enable/verify.sh"
+      },
+      {
+        "title": "Reject anonymous and wrong-identity clients",
+        "text": "refusal/text.md",
+        "verify": "refusal/verify.sh"
+      },
+      {
+        "title": "Disable the listener again",
+        "text": "disable/text.md",
+        "verify": "disable/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "*",
+          "target": "/root/lab/"
+        }
+      ]
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-1node-4GB"
+  }
+}
