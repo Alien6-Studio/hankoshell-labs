@@ -1,0 +1,23 @@
+name: Lab problem
+description: Report a reproducible problem in a learning scenario.
+labels: [bug]
+body:
+  - type: input
+    id: scenario
+    attributes:
+      label: Scenario and step
+      placeholder: applications / Rotate the credential
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: What happened?
+      description: Include commands, expected and actual results, and whether this was Killercoda or an isolated local rehearsal. Remove tokens, credentials and private infrastructure details.
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Source revision
+      description: Commit SHA or session start time, if known.

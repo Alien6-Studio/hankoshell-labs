@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability privately
+    url: https://github.com/Alien6-Studio/hankoshell-labs/security/advisories/new
+    about: Do not put credentials or exploitable vulnerabilities in public issues.
+  - name: Killercoda platform support
+    url: https://killercoda.com/support
+    about: Account, terminal connection or hosted platform problems.

@@ -5,12 +5,36 @@ on:
   pull_request:
 permissions:
   contents: read
+concurrency:
+  group: content-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 jobs:
   validate:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check contribution sign-offs
+        env:
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "$BASE" || "$BASE" =~ ^0+$ ]]; then
+            echo 'A comparison base is required.' >&2
+            exit 1
+          fi
+          while IFS= read -r revision; do
+            author="$(git show -s --format='%an <%ae>' "$revision")"
+            if ! git show -s --format='%B' "$revision" | git interpret-trailers --parse | grep -Fx "Signed-off-by: $author" >/dev/null; then
+              echo "Missing author sign-off on $revision" >&2
+              exit 1
+            fi
+          done < <(git rev-list --no-merges "$BASE..$HEAD")
       - name: Check scenario syntax
         shell: bash
         run: |
