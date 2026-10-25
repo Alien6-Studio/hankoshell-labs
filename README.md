@@ -8,6 +8,8 @@ The first lab covers OIDC client reconciliation, explicit adoption of an existin
 
 The lab uses the published **1.0.0** chart and image, pinned by OCI digest, with Keycloak **26.8.1**. All credentials are generated per session. Do not enter real credentials or connect an existing cluster. APIs remain experimental (`hanko.sh/v1alpha1`).
 
+Killercoda uses Cilium. The lab adds a namespaced policy allowing only the operator to reach the `kube-apiserver` entity on its discovered port, alongside the chart’s NetworkPolicy. Cilium does not match node-hosted API servers with `ipBlock` peers by default; see [Cilium’s policy documentation](https://docs.cilium.io/en/stable/security/policy/layer3/#access-to-from-kube-apiserver). No cluster-wide Cilium settings are changed.
+
 ## Contribute
 
 Edit the Markdown lessons or `operator/assets/`. Step checks compare Kubernetes status with actual Keycloak state. Keep the lab self-contained and use only public images and synthetic data.

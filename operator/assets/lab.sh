@@ -89,7 +89,7 @@ ready() {
   wait_object "$1" "$1" '.status.phase == "Ready" and .status.observedGeneration == .metadata.generation'
 }
 setup() {
-  local context cluster actual tool service endpoint image
+  local context cluster actual tool service endpoint api_port image
   for tool in kubectl helm openssl curl jq cmp; do command -v "$tool" >/dev/null || die "Missing $tool."; done
   [[ ! -e "$STATE" && ! -L "$STATE" ]] || die "State already exists; start a fresh lab session."
   context="$(kubectl config current-context)"
@@ -151,11 +151,15 @@ setup() {
   service="$(k get service kubernetes -n default -o jsonpath='{.spec.clusterIP}')"
   endpoint="$(k get endpointslices -n default -l kubernetes.io/service-name=kubernetes -o json |
     jq -er '.items[0].endpoints[0].addresses[0]')"
-  jq -n --arg digest "$(printf '%s' "$image" | cut -d@ -f2)" --arg service "$service/32" --arg endpoint "$endpoint/32" \
+  api_port="$(k get endpointslices -n default -l kubernetes.io/service-name=kubernetes -o json | jq -er '.items[0].ports[] | select(.name == "https") | .port')"
+  jq -n --arg digest "$(printf '%s' "$image" | cut -d@ -f2)" --arg service "$service/32" --arg endpoint "$endpoint/32" --argjson apiPort "$api_port" \
     '{fullnameOverride:"demo-operator",image:{digest:$digest},
       keycloak:{url:"https://keycloak.auth.svc:8443",credentialsSecret:"operator-credentials",caSecret:"operator-ca"},
-      networkPolicy:{kubernetesAPIServiceCIDRs:[$service],kubernetesAPIEndpointCIDRs:[$endpoint],kubernetesAPIEndpointPorts:[6443]},
+      networkPolicy:{kubernetesAPIServiceCIDRs:[$service],kubernetesAPIEndpointCIDRs:[$endpoint],kubernetesAPIEndpointPorts:[$apiPort]},
       sensitiveWrites:{secrets:["hanko-sa-report-worker"]},resources:{limits:{cpu:"1",memory:"256Mi"}}}' >"$STATE/values.json"
+  if k get crd ciliumnetworkpolicies.cilium.io >/dev/null 2>&1; then
+    sed "s/API_PORT/$api_port/" "$ASSETS/cilium-api.yaml" | k apply -f -
+  fi
   helm install demo oci://ghcr.io/alien6-studio/charts/hankoshell-operator@sha256:a044bdb46471f9383f5123f1ff48f8b3d8f2329aaedb45c61d9d73edde8af540 \
     --kubeconfig "$STATE/kubeconfig" --kube-context "$(cat "$STATE/context")" --namespace auth \
     --values "$STATE/values.json" --wait --timeout 180s

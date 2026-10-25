@@ -1,5 +1,3 @@
-# Authenticate a machine
-
 A service does not need a human login. Declare its dedicated identity:
 
 ```bash

@@ -1,5 +1,3 @@
-# Change the callback
-
 Modify the declaration without using the Keycloak console:
 
 ```bash

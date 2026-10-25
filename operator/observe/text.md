@@ -1,5 +1,3 @@
-# Observe an existing client
-
 Setup created `existing-portal` directly in Keycloak, before installing the operator. It has no HankoShell ownership markers.
 
 `bash /root/lab/lab.sh client existing-portal`{{exec}}

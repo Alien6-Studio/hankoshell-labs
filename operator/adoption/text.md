@@ -1,5 +1,3 @@
-# Approve, then manage
-
 For this synthetic client, approve the exact candidate you just inspected:
 
 ```bash

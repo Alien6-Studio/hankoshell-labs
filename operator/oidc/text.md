@@ -1,5 +1,3 @@
-# Declare an OIDC client
-
 The operator is installed in `auth`, connected to a dedicated Keycloak realm named `example`. It runs without the HankoShell Hub, API or dashboard.
 
 Inspect the declaration:

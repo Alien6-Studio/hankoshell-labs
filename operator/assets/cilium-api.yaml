@@ -1,0 +1,16 @@
+# Cilium does not match node-hosted API servers with Kubernetes ipBlock peers
+# by default. Add only the API entity and port, keeping the chart's policy.
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: demo-operator-api
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: hanko-operator
+      app.kubernetes.io/instance: demo
+  egress:
+    - toEntities: [kube-apiserver]
+      toPorts:
+        - ports:
+            - {port: "API_PORT", protocol: TCP}

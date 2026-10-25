@@ -1,5 +1,3 @@
-# Keycloak as code
-
 In about **20 minutes**, use HankoShell Operator to:
 
 1. Create an OIDC client and change its callback through Kubernetes.
