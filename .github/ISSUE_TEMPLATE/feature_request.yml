@@ -1,0 +1,16 @@
+name: Learning scenario
+description: Propose an improvement or a new hands-on journey.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Learner goal
+      description: Describe the use case, expected outcome and how the learner would verify it.
+    validations:
+      required: true
+  - type: textarea
+    id: prerequisites
+    attributes:
+      label: Prerequisites and limits
+      description: Identify public components or artifacts needed, and what the scenario would not demonstrate.

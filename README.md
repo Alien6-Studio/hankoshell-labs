@@ -1,5 +1,9 @@
 # HankoShell Academy
 
+[![Content](https://github.com/Alien6-Studio/hankoshell-labs/actions/workflows/content.yml/badge.svg)](https://github.com/Alien6-Studio/hankoshell-labs/actions/workflows/content.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+[![Killercoda](https://img.shields.io/badge/labs-Killercoda-f5c542)](https://killercoda.com/alien6)
+
 The public learning scenarios of **HankoShell Academy**. Start with [HankoShell Operator](https://github.com/Alien6-Studio/hankoshell-operator), running on disposable Kubernetes environments.
 
 [Start the browser lab](https://killercoda.com/alien6/scenario/operator) · [Operator documentation](https://github.com/Alien6-Studio/hankoshell-operator#readme)
@@ -47,6 +51,6 @@ its prerequisites and what its checks do not prove.
 
 Before a change, run `bash -n` on shell files, review the JSON, and rehearse every lesson in a fresh Killercoda session. For local rehearsal, use an owned kind cluster named `hankoshell-lab-<12 hex characters>` with its own kubeconfig; set `HANKOSHELL_LAB_LOCAL_CONTEXT` to that context and `HANKOSHELL_LAB_STATE` to a fresh private directory before running `operator/assets/lab.sh setup`. Delete only that disposable cluster afterwards.
 
-Killercoda synchronizes `main`. This repository contains learning content, not the operator release or its qualification evidence.
+Killercoda synchronizes `main`. This repository contains learning content, not the operator release or its qualification evidence. See [contribution guidance](CONTRIBUTING.md) and [security reporting](SECURITY.md).
 
 Apache-2.0. Provider helpers and Keycloak fixtures are adapted from HankoShell Operator, copyright Alien6 and contributors.
