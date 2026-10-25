@@ -1,6 +1,6 @@
 {
   "title": "Inventory, configuration snapshots and restart recovery",
-  "description": "Preview. Discover an existing provider without writes, materialize Observe declarations, capture configuration and restart the controller.",
+  "description": "Discover an existing provider without writes, materialize Observe declarations, capture configuration and restart the controller.",
   "details": {
     "intro": {
       "text": "intro.md",

@@ -1,6 +1,6 @@
 {
   "title": "Secure operator metrics",
-  "description": "Preview. Enable mutual TLS, prove exact-client and anonymous refusal, then disable the metrics listener.",
+  "description": "Enable mutual TLS, prove exact-client and anonymous refusal, then disable the metrics listener.",
   "details": {
     "intro": {
       "text": "intro.md",

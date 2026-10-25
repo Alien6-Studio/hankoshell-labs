@@ -1,6 +1,6 @@
 {
   "title": "Kubernetes workload identity without client secrets",
-  "description": "Preview. Verify cluster trust, activate a federated client and exchange actual kubelet-projected assertions.",
+  "description": "Verify cluster trust, activate a federated client and exchange actual kubelet-projected assertions.",
   "details": {
     "intro": {
       "text": "intro.md",

@@ -1,6 +1,6 @@
 {
   "title": "Organizations, roles and API authorization",
-  "description": "Preview. Build a hierarchy, grant direct or descendant access and prove real UMA allow/deny decisions.",
+  "description": "Build a hierarchy, grant direct or descendant access and prove real UMA allow/deny decisions.",
   "details": {
     "intro": {
       "text": "intro.md",

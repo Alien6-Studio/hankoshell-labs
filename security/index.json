@@ -1,6 +1,6 @@
 {
   "title": "Realm policy, MFA and identity brokers",
-  "description": "Preview. Apply a shared IAM profile, inspect native policy, update it and review an issuer projection.",
+  "description": "Apply a shared IAM profile, inspect native policy, update it and review an issuer projection.",
   "details": {
     "intro": {
       "text": "intro.md",

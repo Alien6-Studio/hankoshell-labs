@@ -1,6 +1,6 @@
 {
   "title": "Safety boundaries and experimental prerequisites",
-  "description": "Preview. Inspect lifecycle dry runs, approval and image-trust refusals, connected-resource prerequisites and retired messaging.",
+  "description": "Inspect lifecycle dry runs, approval and image-trust refusals, connected-resource prerequisites and retired messaging.",
   "details": {
     "intro": {
       "text": "intro.md",

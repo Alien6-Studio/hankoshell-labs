@@ -8,25 +8,25 @@ The public learning scenarios of **HankoShell Academy**. Start with [HankoShell 
 
 Each lab starts its own disposable cluster and synthetic Keycloak. No previous
 session is required. Allow 20–25 minutes plus image downloads. Killercoda requires
-a free account; free sessions last up to one hour. New modules marked **preview**
-are undergoing hosted verification and are not yet promoted on hanko.sh.
+a free account; free sessions last up to one hour. All eight scenarios have
+completed local rehearsal and a fresh hosted walkthrough.
 
 | Scenario | What you practice |
 | --- | --- |
 | [Start here](https://killercoda.com/alien6/scenario/operator) | OIDC reconciliation, read-only observation, explicit adoption and machine authentication. |
-| [Realm security](security/) — preview | Shared IAM profiles, password/MFA/session policy, disabled broker configuration and issuer projection. |
-| [Applications](applications/) — preview | Confidential OIDC, signed SAML configuration, token claims, credential rotation, runtime delivery and withdrawn consent. |
-| [Organizations and authorization](organizations/) — preview | Hierarchy, composite/group roles, direct/descendant grants and real UMA allow/deny/revocation decisions. |
-| [Inventory and recovery](inventory/) — preview | Dry-run/Observe import, locally approved configuration snapshot and controller restart. |
-| [Workload identity](workload/) — preview | Cluster-bound trust, native federated authentication, kubelet-projected assertions and wrong-subject rejection. |
-| [Safety boundaries](guardrails/) — preview | Lifecycle dry runs and approval, theme image-trust refusal, Hub/mesh prerequisites and deprecated messaging. |
-| [Secure metrics](metrics/) — preview | TLS 1.3, exact SPIFFE client identity, anonymous/wrong-identity rejection and listener shutdown. |
+| [Realm security](https://killercoda.com/alien6/scenario/security) | Shared IAM profiles, password/MFA/session policy, disabled broker configuration and issuer projection. |
+| [Applications](https://killercoda.com/alien6/scenario/applications) | Confidential OIDC, signed SAML configuration, token claims, credential rotation, runtime delivery and withdrawn consent. |
+| [Organizations and authorization](https://killercoda.com/alien6/scenario/organizations) | Hierarchy, composite/group roles, direct/descendant grants and real UMA allow/deny/revocation decisions. |
+| [Inventory and recovery](https://killercoda.com/alien6/scenario/inventory) | Dry-run/Observe import, locally approved configuration snapshot and controller restart. |
+| [Workload identity](https://killercoda.com/alien6/scenario/workload) | Cluster-bound trust, native federated authentication, kubelet-projected assertions and wrong-subject rejection. |
+| [Safety boundaries](https://killercoda.com/alien6/scenario/guardrails) | Lifecycle dry runs and approval, theme image-trust refusal, Hub/mesh prerequisites and deprecated messaging. |
+| [Secure metrics](https://killercoda.com/alien6/scenario/metrics) | TLS 1.3, exact SPIFFE client identity, anonymous/wrong-identity rejection and listener shutdown. |
 
 Together these scenarios address all 17 CRD surfaces. This is **not complete
-end-to-end coverage of every feature**: the last module deliberately demonstrates
-refusal, not successful advanced execution. Positive labs for managed provisioning,
-Upgrade/Clone/DBSwitch, database backup, signed theme installation, bounded
-delegation, connected Fleet/mesh, secure metrics and the experimental authentik
+end-to-end coverage of every feature**: the safety-boundaries module deliberately
+demonstrates refusal, not successful advanced execution. Positive labs for managed
+provisioning, Upgrade/Clone/DBSwitch, database backup, signed theme installation,
+bounded delegation, connected Fleet/mesh and the experimental authentik
 adapter remain tracked in [#3](https://github.com/Alien6-Studio/hankoshell-labs/issues/3).
 Successful single-node exercises do not qualify production HA or upgrades.
 

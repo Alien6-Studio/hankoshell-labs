@@ -1,6 +1,6 @@
 {
   "title": "Application protocols, claims and credential rotation",
-  "description": "Preview. Compare confidential OIDC and signed SAML, inspect machine claims and rotate a credential without replacing its client.",
+  "description": "Compare confidential OIDC and signed SAML, inspect machine claims and rotate a credential without replacing its client.",
   "details": {
     "intro": {
       "text": "intro.md",
