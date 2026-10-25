@@ -1,0 +1,9 @@
+apiVersion: hanko.sh/v1alpha1
+kind: HankoRealm
+metadata: {name: example}
+spec: {displayName: Academy safety boundaries}
+---
+apiVersion: hanko.sh/v1alpha1
+kind: HankoKeycloakInstance
+metadata: {name: inventory-keycloak}
+spec: {mode: external, adminRef: {name: inventory-credentials}, tlsCARef: operator-ca}

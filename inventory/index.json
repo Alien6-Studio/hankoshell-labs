@@ -1,0 +1,47 @@
+{
+  "title": "Inventory, configuration snapshots and restart recovery",
+  "description": "Preview. Discover an existing provider without writes, materialize Observe declarations, capture configuration and restart the controller.",
+  "details": {
+    "intro": {
+      "text": "intro.md",
+      "background": "background.sh",
+      "foreground": "foreground.sh"
+    },
+    "steps": [
+      {
+        "title": "Preview a read-only import",
+        "text": "preview/text.md",
+        "verify": "preview/verify.sh"
+      },
+      {
+        "title": "Materialize Observe declarations",
+        "text": "import/text.md",
+        "verify": "import/verify.sh"
+      },
+      {
+        "title": "Capture immutable operator configuration",
+        "text": "snapshot/text.md",
+        "verify": "snapshot/verify.sh"
+      },
+      {
+        "title": "Recover after a controller restart",
+        "text": "recovery/text.md",
+        "verify": "recovery/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "*",
+          "target": "/root/lab/"
+        }
+      ]
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-1node-4GB"
+  }
+}

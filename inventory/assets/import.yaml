@@ -1,0 +1,10 @@
+apiVersion: hanko.sh/v1alpha1
+kind: HankoImport
+metadata: {name: discover}
+spec:
+  sourceRef: inventory-keycloak
+  realms: [example]
+  includeClients: true
+  includeServiceAccounts: true
+  includeIdentityProviders: false
+  dryRun: false

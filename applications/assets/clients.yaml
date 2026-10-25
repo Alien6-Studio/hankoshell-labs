@@ -1,0 +1,37 @@
+apiVersion: hanko.sh/v1alpha1
+kind: HankoApplication
+metadata: {name: storefront}
+spec:
+  realmRef: example
+  clientID: storefront
+  protocol: oidc
+  type: web
+  redirectURIs: [https://store.example.com/callback]
+  webOrigins: [https://store.example.com]
+  postLogoutRedirectURIs: [https://store.example.com/]
+  roles: [{name: operator, description: Operate the storefront}]
+  secretRotationPolicy: {enabled: true, intervalDays: 30}
+---
+apiVersion: hanko.sh/v1alpha1
+kind: HankoApplication
+metadata: {name: legacy-saml}
+spec:
+  realmRef: example
+  clientID: https://legacy.example.com/entity
+  protocol: saml
+  saml:
+    assertionConsumerServices: [https://legacy.example.com/acs]
+    requireSignedAssertions: true
+    nameIDFormat: persistent
+---
+apiVersion: hanko.sh/v1alpha1
+kind: HankoServiceAccount
+metadata: {name: report-worker}
+spec:
+  realmRef: example
+  clientID: report-worker
+  authentication: {mode: Secret}
+  secretRotationPolicy: {enabled: true, intervalDays: 30}
+  tokenClaims:
+    - {name: audience, claim: aud, value: reporting-api, addToAccessToken: true}
+    - {name: environment, claim: environment, value: academy, addToAccessToken: true}

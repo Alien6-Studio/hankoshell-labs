@@ -1,0 +1,57 @@
+{
+  "title": "Application protocols, claims and credential rotation",
+  "description": "Preview. Compare confidential OIDC and signed SAML, inspect machine claims and rotate a credential without replacing its client.",
+  "details": {
+    "intro": {
+      "text": "intro.md",
+      "background": "background.sh",
+      "foreground": "foreground.sh"
+    },
+    "steps": [
+      {
+        "title": "Declare a confidential OIDC application",
+        "text": "web/text.md",
+        "verify": "web/verify.sh"
+      },
+      {
+        "title": "Inspect signed SAML and public metadata",
+        "text": "saml/text.md",
+        "verify": "saml/verify.sh"
+      },
+      {
+        "title": "Inspect declared claims in a real machine token",
+        "text": "claims/text.md",
+        "verify": "claims/verify.sh"
+      },
+      {
+        "title": "Rotate and prove that the old credential stops working",
+        "text": "rotation/text.md",
+        "verify": "rotation/verify.sh"
+      },
+      {
+        "title": "Deliver runtime identity to an authorized workload",
+        "text": "runtime/text.md",
+        "verify": "runtime/verify.sh"
+      },
+      {
+        "title": "Stop delivery when workload consent is withdrawn",
+        "text": "consent/text.md",
+        "verify": "consent/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "*",
+          "target": "/root/lab/"
+        }
+      ]
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-1node-4GB"
+  }
+}

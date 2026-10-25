@@ -1,0 +1,4 @@
+apiVersion: hanko.sh/v1alpha1
+kind: HankoSnapshot
+metadata: {name: before-change}
+spec: {instanceRef: inventory-keycloak, includeData: false}

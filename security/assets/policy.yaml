@@ -1,0 +1,31 @@
+apiVersion: hanko.sh/v1alpha1
+kind: HankoIAMProfile
+metadata: {name: workforce}
+spec:
+  security:
+    mfaPolicy: required
+    passwordMinLength: 20
+    passwordHistory: 5
+    passwordRequireUppercase: true
+    passwordRequireLowercase: true
+    passwordRequireDigit: true
+    passwordRequireSpecial: true
+    passwordDisallowUsername: true
+    bruteForce: {enabled: true, maxFailures: 5, waitIncrements: 1m}
+    sessionLifetime: 8h
+    sessionIdleTimeout: 30m
+    sslRequired: all
+    revokeRefreshToken: true
+    userEventsEnabled: true
+    adminEventsEnabled: true
+    auditRetentionDays: 7
+---
+apiVersion: hanko.sh/v1alpha1
+kind: HankoRealm
+metadata: {name: example}
+spec:
+  displayName: Academy workforce
+  iamProfileRef: workforce
+  roles:
+    - {name: reader, description: Read business data}
+    - {name: editor, description: Maintain business data, composites: [reader]}

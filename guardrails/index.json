@@ -1,0 +1,57 @@
+{
+  "title": "Safety boundaries and experimental prerequisites",
+  "description": "Preview. Inspect lifecycle dry runs, approval and image-trust refusals, connected-resource prerequisites and retired messaging.",
+  "details": {
+    "intro": {
+      "text": "intro.md",
+      "background": "background.sh",
+      "foreground": "foreground.sh"
+    },
+    "steps": [
+      {
+        "title": "Reject reserved authority at admission",
+        "text": "admission/text.md",
+        "verify": "admission/verify.sh"
+      },
+      {
+        "title": "Inspect Upgrade, Clone and DBSwitch dry runs",
+        "text": "plans/text.md",
+        "verify": "plans/verify.sh"
+      },
+      {
+        "title": "Require independent local approval",
+        "text": "approval/text.md",
+        "verify": "approval/verify.sh"
+      },
+      {
+        "title": "Refuse an unapproved theme image",
+        "text": "image/text.md",
+        "verify": "image/verify.sh"
+      },
+      {
+        "title": "Refuse missing Hub and mesh identity",
+        "text": "connections/text.md",
+        "verify": "connections/verify.sh"
+      },
+      {
+        "title": "Recognize the retired messaging surface",
+        "text": "email/text.md",
+        "verify": "email/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "*",
+          "target": "/root/lab/"
+        }
+      ]
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-1node-4GB"
+  }
+}

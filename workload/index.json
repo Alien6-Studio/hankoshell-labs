@@ -1,0 +1,52 @@
+{
+  "title": "Kubernetes workload identity without client secrets",
+  "description": "Preview. Verify cluster trust, activate a federated client and exchange actual kubelet-projected assertions.",
+  "details": {
+    "intro": {
+      "text": "intro.md",
+      "background": "background.sh",
+      "foreground": "foreground.sh"
+    },
+    "steps": [
+      {
+        "title": "Inspect the separate connection identities",
+        "text": "source/text.md",
+        "verify": "source/verify.sh"
+      },
+      {
+        "title": "Bind the trust to this exact cluster",
+        "text": "trust/text.md",
+        "verify": "trust/verify.sh"
+      },
+      {
+        "title": "Activate the native federated identity",
+        "text": "identity/text.md",
+        "verify": "identity/verify.sh"
+      },
+      {
+        "title": "Exchange a real kubelet-projected assertion",
+        "text": "token/text.md",
+        "verify": "token/verify.sh"
+      },
+      {
+        "title": "Reject another ServiceAccount",
+        "text": "denial/text.md",
+        "verify": "denial/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "*",
+          "target": "/root/lab/"
+        }
+      ]
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-1node-4GB"
+  }
+}

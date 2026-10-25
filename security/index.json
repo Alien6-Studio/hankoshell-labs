@@ -1,0 +1,47 @@
+{
+  "title": "Realm policy, MFA and identity brokers",
+  "description": "Preview. Apply a shared IAM profile, inspect native policy, update it and review an issuer projection.",
+  "details": {
+    "intro": {
+      "text": "intro.md",
+      "background": "background.sh",
+      "foreground": "foreground.sh"
+    },
+    "steps": [
+      {
+        "title": "Apply a shared security profile",
+        "text": "policy/text.md",
+        "verify": "policy/verify.sh"
+      },
+      {
+        "title": "Configure a broker without contacting an external IdP",
+        "text": "broker/text.md",
+        "verify": "broker/verify.sh"
+      },
+      {
+        "title": "Change the shared policy",
+        "text": "update/text.md",
+        "verify": "update/verify.sh"
+      },
+      {
+        "title": "Inspect the public issuer projection",
+        "text": "issuer/text.md",
+        "verify": "issuer/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "*",
+          "target": "/root/lab/"
+        }
+      ]
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-1node-4GB"
+  }
+}

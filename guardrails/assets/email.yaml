@@ -1,0 +1,4 @@
+apiVersion: hanko.sh/v1alpha1
+kind: HankoEmailProvider
+metadata: {name: legacy-mail}
+spec: {type: office365, enabled: true, fromAddress: noreply@example.com}

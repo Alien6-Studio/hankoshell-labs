@@ -1,0 +1,23 @@
+apiVersion: hanko.sh/v1alpha1
+kind: HankoRealm
+metadata: {name: example}
+spec:
+  displayName: Academy workforce
+  iamProfileRef: workforce
+  roles:
+    - {name: reader, description: Read business data}
+    - {name: editor, description: Maintain business data, composites: [reader]}
+  identityProviders:
+    - alias: upstream
+      providerID: oidc
+      displayName: Synthetic upstream
+      enabled: false
+      trustEmail: false
+      clientSecretRef: {name: upstream-credentials, key: client-secret}
+      config:
+        clientId: academy
+        authorizationUrl: https://login.example.com/authorize
+        tokenUrl: https://login.example.com/token
+        jwksUrl: https://login.example.com/jwks
+        useJwksUrl: "true"
+        validateSignature: "true"

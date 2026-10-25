@@ -2,6 +2,24 @@
   "items": [
     {
       "path": "operator"
+    },
+    {
+      "path": "security"
+    },
+    {
+      "path": "applications"
+    },
+    {
+      "path": "organizations"
+    },
+    {
+      "path": "inventory"
+    },
+    {
+      "path": "workload"
+    },
+    {
+      "path": "guardrails"
     }
   ]
 }

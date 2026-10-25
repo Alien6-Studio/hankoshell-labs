@@ -1,0 +1,20 @@
+apiVersion: hanko.sh/v1alpha1
+kind: HankoTenant
+metadata: {name: unconfigured-tenant}
+spec:
+  hubTenantID: academy-only
+  hubEndpoint: https://unconfigured-hub.invalid
+  realmRef: example
+  hubTokenSecretRef: {name: unconfigured-hub-credential}
+---
+apiVersion: hanko.sh/v1alpha1
+kind: HankoMeshService
+metadata: {name: unconfigured-mesh}
+spec:
+  tenantRef: unconfigured-tenant
+  identityRef: unconfigured-identity
+  resourceServerRef: unconfigured-api
+  serviceRef: unconfigured-service
+  workloadServiceAccountRef: unconfigured-workload
+  enforcementMode: auditOnly
+  ports: [{protocol: TCP, port: 8080}]

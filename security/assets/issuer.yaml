@@ -1,0 +1,4 @@
+apiVersion: hanko.sh/v1alpha1
+kind: HankoIssuer
+metadata: {name: workforce}
+spec: {host: login.example.com, realmRef: example}

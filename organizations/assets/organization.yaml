@@ -1,0 +1,44 @@
+apiVersion: hanko.sh/v1alpha1
+kind: HankoRealm
+metadata: {name: example}
+spec: {displayName: Academy organization}
+---
+apiVersion: hanko.sh/v1alpha1
+kind: HankoRole
+metadata: {name: reader}
+spec: {realmRef: example, name: reader, description: Read business data}
+---
+apiVersion: hanko.sh/v1alpha1
+kind: HankoRole
+metadata: {name: editor}
+spec: {realmRef: example, name: editor, composite: true, composites: [reader]}
+---
+apiVersion: hanko.sh/v1alpha1
+kind: HankoOrganization
+metadata: {name: company}
+spec: {realmRef: example, name: Sample Company, slug: sample, roles: [reader], domains: [sample.example]}
+---
+apiVersion: hanko.sh/v1alpha1
+kind: HankoOrganization
+metadata: {name: engineering}
+spec: {realmRef: example, name: Engineering, slug: engineering, parentRef: company, roles: [editor]}
+---
+apiVersion: hanko.sh/v1alpha1
+kind: HankoApplication
+metadata: {name: invoice-api}
+spec: {realmRef: example, clientID: invoice-api, type: m2m}
+---
+apiVersion: hanko.sh/v1alpha1
+kind: HankoServiceAccount
+metadata: {name: root-worker}
+spec: {realmRef: example, clientID: root-worker}
+---
+apiVersion: hanko.sh/v1alpha1
+kind: HankoServiceAccount
+metadata: {name: team-worker}
+spec: {realmRef: example, clientID: team-worker}
+---
+apiVersion: hanko.sh/v1alpha1
+kind: HankoServiceAccount
+metadata: {name: outside-worker}
+spec: {realmRef: example, clientID: outside-worker}

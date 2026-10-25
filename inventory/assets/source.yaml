@@ -1,0 +1,18 @@
+apiVersion: hanko.sh/v1alpha1
+kind: HankoKeycloakInstance
+metadata: {name: inventory-keycloak}
+spec:
+  mode: external
+  adminRef: {name: inventory-credentials}
+  tlsCARef: operator-ca
+---
+apiVersion: hanko.sh/v1alpha1
+kind: HankoImport
+metadata: {name: preview}
+spec:
+  sourceRef: inventory-keycloak
+  realms: [example]
+  includeClients: true
+  includeServiceAccounts: true
+  includeIdentityProviders: false
+  dryRun: true

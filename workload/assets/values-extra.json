@@ -1,0 +1,1 @@
+{"workloadBinding":{"grants":[{"namespace":"auth","serviceAccounts":["worker","outsider"],"configMaps":[]}]}}

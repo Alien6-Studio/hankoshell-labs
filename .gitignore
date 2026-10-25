@@ -1,2 +1,4 @@
 .DS_Store
 .lab-state/
+/workload/assets/trust.json
+/workload/assets/identity.json

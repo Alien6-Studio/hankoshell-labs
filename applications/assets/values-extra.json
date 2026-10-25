@@ -1,0 +1,1 @@
+{"sensitiveWrites":{"secrets":["hanko-app-storefront","hanko-sa-report-worker","storefront-runtime"]},"workloadBinding":{"grants":[{"namespace":"auth","serviceAccounts":["storefront"],"configMaps":["storefront-runtime"]}]}}

@@ -1,0 +1,15 @@
+apiVersion: hanko.sh/v1alpha1
+kind: HankoResourceServer
+metadata: {name: invoices}
+spec:
+  realmRef: example
+  applicationRef: invoice-api
+  audience: invoice-api
+  scopes: [{name: read}, {name: write}]
+  resources:
+    - {name: invoice, uris: [/invoices/*], scopes: [read, write]}
+  permissions:
+    - name: company-read
+      resources: [invoice]
+      scopes: [read]
+      principals: [{kind: organization, ref: company, includeDescendants: false}]

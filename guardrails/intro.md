@@ -1,0 +1,3 @@
+Experimental operations and connected resources have extra authority boundaries. Inspect lifecycle dry runs, approval, image trust, missing Hub credentials and the deprecated messaging CRD. Allow 20 minutes. These are deliberate refusal/prerequisite exercises, not successful managed upgrades, theme publication, fleet synchronization or mesh enforcement.
+
+Wait for **Ready**. Operator **1.0.0** and Keycloak **26.8.1** are pinned by digest. Use synthetic data only. No existing cluster, Hub, registry credential or mail account is required. Lifecycle controllers are explicitly enabled in this sandbox; every non-dry-run action still needs its own local approval.

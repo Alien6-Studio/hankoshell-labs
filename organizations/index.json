@@ -1,0 +1,47 @@
+{
+  "title": "Organizations, roles and API authorization",
+  "description": "Preview. Build a hierarchy, grant direct or descendant access and prove real UMA allow/deny decisions.",
+  "details": {
+    "intro": {
+      "text": "intro.md",
+      "background": "background.sh",
+      "foreground": "foreground.sh"
+    },
+    "steps": [
+      {
+        "title": "Build a company and its team",
+        "text": "hierarchy/text.md",
+        "verify": "hierarchy/verify.sh"
+      },
+      {
+        "title": "Grant direct membership only",
+        "text": "direct/text.md",
+        "verify": "direct/verify.sh"
+      },
+      {
+        "title": "Explicitly include owned descendants",
+        "text": "descendants/text.md",
+        "verify": "descendants/verify.sh"
+      },
+      {
+        "title": "Remove a grant without deleting the organization",
+        "text": "revocation/text.md",
+        "verify": "revocation/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "*",
+          "target": "/root/lab/"
+        }
+      ]
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-1node-4GB"
+  }
+}

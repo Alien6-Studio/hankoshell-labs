@@ -1,0 +1,17 @@
+apiVersion: hanko.sh/v1alpha1
+kind: HankoImport
+metadata: {name: workload-source}
+spec:
+  sourceRef: workload-client-writer
+  realms: [example]
+  dryRun: true
+  includeClients: false
+  includeServiceAccounts: false
+  includeIdentityProviders: false
+---
+apiVersion: hanko.sh/v1alpha1
+kind: HankoRealm
+metadata:
+  name: example
+  labels: {hanko.sh/imported-by: workload-source}
+spec: {}

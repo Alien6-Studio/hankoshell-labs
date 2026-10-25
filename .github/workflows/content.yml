@@ -15,5 +15,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          while IFS= read -r -d '' file; do bash -n "$file"; done < <(find operator -name '*.sh' -print0)
-          jq -e . structure.json operator/index.json >/dev/null
+          while IFS= read -r -d '' file; do bash -n "$file"; done < <(git ls-files -z '*.sh')
+          while IFS= read -r -d '' file; do jq -e . "$file" >/dev/null; done < <(git ls-files -z '*.json')
+          while IFS= read -r scenario; do
+            index="$scenario/index.json"
+            test -f "$index"
+            while IFS= read -r file; do test -f "$scenario/$file"; done < <(
+              jq -r '[.details.intro.text, .details.intro.background, .details.intro.foreground,
+                .details.finish.text, (.details.steps[] | .text, .verify)] | .[] | strings' "$index")
+          done < <(jq -r '.items[].path' structure.json)

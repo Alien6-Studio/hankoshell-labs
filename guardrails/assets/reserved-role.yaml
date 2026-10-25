@@ -1,0 +1,4 @@
+apiVersion: hanko.sh/v1alpha1
+kind: HankoRole
+metadata: {name: forbidden-platform-role}
+spec: {realmRef: example, name: HANKO_PLATFORM_ADMIN}

@@ -1,0 +1,7 @@
+apiVersion: hanko.sh/v1alpha1
+kind: HankoTheme
+metadata: {name: unapproved-theme}
+spec:
+  # A real immutable image, deliberately NOT an approved theme builder.
+  buildImage: ghcr.io/alien6-studio/hankoshell-operator@sha256:ec9a186a44a465d02f6d3279d87b86e39b2ee1d26314a6d8d04ec78c3235fe28
+  keycloakPVC: unconfigured-themes
