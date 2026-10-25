@@ -1,0 +1,52 @@
+{
+  "title": "Keycloak as code with HankoShell Operator",
+  "description": "Create an OIDC client, explicitly adopt an existing client and authenticate a machine identity. A real disposable cluster, no local installation.",
+  "details": {
+    "intro": {
+      "text": "intro.md",
+      "background": "background.sh",
+      "foreground": "foreground.sh"
+    },
+    "steps": [
+      {
+        "title": "Create an OIDC client",
+        "text": "oidc/text.md",
+        "verify": "oidc/verify.sh"
+      },
+      {
+        "title": "Reconcile a callback change",
+        "text": "callback/text.md",
+        "verify": "callback/verify.sh"
+      },
+      {
+        "title": "Observe an existing client",
+        "text": "observe/text.md",
+        "verify": "observe/verify.sh"
+      },
+      {
+        "title": "Explicitly adopt it",
+        "text": "adoption/text.md",
+        "verify": "adoption/verify.sh"
+      },
+      {
+        "title": "Authenticate a machine",
+        "text": "machine/text.md",
+        "verify": "machine/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "*",
+          "target": "/root/lab/"
+        }
+      ]
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-1node-4GB"
+  }
+}

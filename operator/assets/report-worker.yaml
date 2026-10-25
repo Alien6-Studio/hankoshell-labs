@@ -1,0 +1,8 @@
+apiVersion: hanko.sh/v1alpha1
+kind: HankoServiceAccount
+metadata: {name: report-worker}
+spec:
+  realmRef: example
+  clientID: report-worker
+  authentication: {mode: Secret}
+  secretRotationPolicy: {enabled: true, intervalDays: 30}
