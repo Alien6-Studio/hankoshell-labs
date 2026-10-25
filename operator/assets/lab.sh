@@ -2,8 +2,10 @@
 # Apache-2.0. Provider helpers adapted from hankoshell-operator examples/kind.
 set -euo pipefail
 umask 077
-ASSETS="$(cd "$(dirname "$0")" && pwd)"
+ASSETS="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 STATE="${HANKOSHELL_LAB_STATE:-/root/.hankoshell-lab}"
+CHART='oci://ghcr.io/alien6-studio/charts/hankoshell-operator@sha256:a044bdb46471f9383f5123f1ff48f8b3d8f2329aaedb45c61d9d73edde8af540'
+OPERATOR_IMAGE='ghcr.io/alien6-studio/hankoshell-operator@sha256:ec9a186a44a465d02f6d3279d87b86e39b2ee1d26314a6d8d04ec78c3235fe28'
 FORWARD_PID=""
 die() { echo "Lab: $*" >&2; exit 1; }
 k() { kubectl --kubeconfig "$STATE/kubeconfig" --context "$(cat "$STATE/context")" --request-timeout=30s -n auth "$@"; }
@@ -90,6 +92,15 @@ ready() {
 }
 setup() {
   local context cluster actual tool service endpoint api_port image
+  local roles=(manage-realm manage-clients manage-events)
+  local inventory_roles=(view-realm view-clients)
+  case "${HANKOSHELL_LAB_MODULE:-operator}" in
+    organizations) roles+=(manage-users view-users) ;;
+    inventory) roles+=(view-users view-realm view-clients); inventory_roles+=(view-users) ;;
+    security) roles+=(manage-identity-providers view-identity-providers view-realm view-clients) ;;
+    operator|applications|workload|operations|guardrails) ;;
+    *) die "Unknown learning module." ;;
+  esac
   for tool in kubectl helm openssl curl jq cmp; do command -v "$tool" >/dev/null || die "Missing $tool."; done
   [[ ! -e "$STATE" && ! -L "$STATE" ]] || die "State already exists; start a fresh lab session."
   context="$(kubectl config current-context)"
@@ -120,7 +131,9 @@ setup() {
   k create secret generic keycloak-bootstrap --from-file="password=$STATE/admin-password"
   k create secret tls keycloak-tls --cert "$STATE/ca.crt" --key "$STATE/tls.key"
   k create secret generic operator-ca --from-file="ca.crt=$STATE/ca.crt"
-  sed "s|KEYCLOAK_IMAGE|$keycloak_image|" "$ASSETS/keycloak.yaml" | k apply -f -
+  sed "s|KEYCLOAK_IMAGE|$keycloak_image|" "$ASSETS/keycloak.yaml" >"$STATE/keycloak.yaml"
+  if declare -F customize_keycloak >/dev/null; then customize_keycloak "$STATE/keycloak.yaml"; fi
+  k apply -f "$STATE/keycloak.yaml"
   k rollout status deployment/keycloak --timeout=240s
   forward
   login
@@ -128,8 +141,8 @@ setup() {
   echo "Preparing the test realm and scoped credentials…"
   api POST /admin/realms --data-binary '{"realm":"example","enabled":true}' >/dev/null
   PROXY="$(client master example-realm | jq -er .id)"
-  identity demo-operator "$STATE/operator-secret" manage-realm manage-clients manage-events
-  identity demo-inventory "$STATE/inventory-secret" view-realm view-clients
+  identity demo-operator "$STATE/operator-secret" "${roles[@]}"
+  identity demo-inventory "$STATE/inventory-secret" "${inventory_roles[@]}"
   k create secret generic operator-credentials --from-literal=client-id=demo-operator \
     --from-file="client-secret=$STATE/operator-secret"
   printf 'https://keycloak.auth.svc:8443' >"$STATE/provider-url"
@@ -147,7 +160,7 @@ setup() {
   jq -er .id "$STATE/existing-before.json" >"$STATE/existing-id"
 
   echo "Installing the public release…"
-  image="ghcr.io/alien6-studio/hankoshell-operator@sha256:ec9a186a44a465d02f6d3279d87b86e39b2ee1d26314a6d8d04ec78c3235fe28"
+  image="$OPERATOR_IMAGE"
   service="$(k get service kubernetes -n default -o jsonpath='{.spec.clusterIP}')"
   endpoint="$(k get endpointslices -n default -l kubernetes.io/service-name=kubernetes -o json |
     jq -er '.items[0].endpoints[0].addresses[0]')"
@@ -157,10 +170,14 @@ setup() {
       keycloak:{url:"https://keycloak.auth.svc:8443",credentialsSecret:"operator-credentials",caSecret:"operator-ca"},
       networkPolicy:{kubernetesAPIServiceCIDRs:[$service],kubernetesAPIEndpointCIDRs:[$endpoint],kubernetesAPIEndpointPorts:[$apiPort]},
       sensitiveWrites:{secrets:["hanko-sa-report-worker"]},resources:{limits:{cpu:"1",memory:"256Mi"}}}' >"$STATE/values.json"
+  if [[ -f "$ASSETS/values-extra.json" ]]; then
+    jq -s '.[0] * .[1]' "$STATE/values.json" "$ASSETS/values-extra.json" >"$STATE/merged-values.json"
+    mv "$STATE/merged-values.json" "$STATE/values.json"
+  fi
   if k get crd ciliumnetworkpolicies.cilium.io >/dev/null 2>&1; then
     sed "s/API_PORT/$api_port/" "$ASSETS/cilium-api.yaml" | k apply -f -
   fi
-  helm install demo oci://ghcr.io/alien6-studio/charts/hankoshell-operator@sha256:a044bdb46471f9383f5123f1ff48f8b3d8f2329aaedb45c61d9d73edde8af540 \
+  helm install demo "$CHART" \
     --kubeconfig "$STATE/kubeconfig" --kube-context "$(cat "$STATE/context")" --namespace auth \
     --values "$STATE/values.json" --wait --timeout 180s
   touch "$STATE/ready"
@@ -214,6 +231,8 @@ check_machine() {
   jq '{token_type,expires_in}' "$STATE/worker-token.json"
   echo "PASS: the machine identity obtained a token; its value stays private."
 }
+# Independent lessons reuse the verified bootstrap and provider helpers.
+if [[ "${BASH_SOURCE[0]}" != "$0" ]]; then return 0; fi
 case "${1:-}" in
   setup) setup ;;
   client)

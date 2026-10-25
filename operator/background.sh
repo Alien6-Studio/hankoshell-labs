@@ -10,5 +10,9 @@ if ! command -v helm >/dev/null; then
   install -m 755 /root/lab/linux-amd64/helm /usr/local/bin/helm
   rm -r /root/lab/linux-amd64 /root/lab/helm.tgz
 fi
-bash /root/lab/lab.sh setup > /root/lab/setup.log 2>&1
+if [[ -f /root/lab/lesson.sh ]]; then
+  bash /root/lab/lesson.sh setup > /root/lab/setup.log 2>&1
+else
+  bash /root/lab/lab.sh setup > /root/lab/setup.log 2>&1
+fi
 touch /root/lab/setup-ready
