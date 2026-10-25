@@ -23,7 +23,7 @@ completed local rehearsal and a fresh hosted walkthrough.
 | [Organizations and authorization](https://killercoda.com/alien6/scenario/organizations) | Hierarchy, composite/group roles, direct/descendant grants and real UMA allow/deny/revocation decisions. |
 | [Inventory and recovery](https://killercoda.com/alien6/scenario/inventory) | Dry-run/Observe import, locally approved configuration snapshot and controller restart. |
 | [Workload identity](https://killercoda.com/alien6/scenario/workload) | Cluster-bound trust, native federated authentication, kubelet-projected assertions and wrong-subject rejection. |
-| [Safety boundaries](https://killercoda.com/alien6/scenario/guardrails) | Lifecycle dry runs and approval, theme image-trust refusal, Hub/mesh prerequisites and deprecated messaging. |
+| [Safety boundaries](https://killercoda.com/alien6/scenario/guardrails) | Lifecycle plans and approval, image trust, Hub/mesh prerequisites and notification ownership. |
 | [Secure metrics](https://killercoda.com/alien6/scenario/metrics) | TLS 1.3, exact SPIFFE client identity, anonymous/wrong-identity rejection and listener shutdown. |
 
 Together these scenarios address all 17 CRD surfaces. This is **not complete

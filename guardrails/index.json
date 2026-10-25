@@ -1,6 +1,6 @@
 {
   "title": "Safety boundaries and experimental prerequisites",
-  "description": "Inspect lifecycle dry runs, approval and image-trust refusals, connected-resource prerequisites and retired messaging.",
+  "description": "Inspect lifecycle plans, approval and image-trust checks, connected-resource prerequisites and notification ownership.",
   "details": {
     "intro": {
       "text": "intro.md",
@@ -34,7 +34,7 @@
         "verify": "connections/verify.sh"
       },
       {
-        "title": "Recognize the retired messaging surface",
+        "title": "Understand notification ownership",
         "text": "email/text.md",
         "verify": "email/verify.sh"
       }

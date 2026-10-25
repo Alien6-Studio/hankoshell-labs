@@ -48,3 +48,12 @@ jobs:
               jq -r '[.details.intro.text, .details.intro.background, .details.intro.foreground,
                 .details.finish.text, (.details.steps[] | .text, .verify)] | .[] | strings' "$index")
           done < <(jq -r '.items[].path' structure.json)
+      - name: Check public history for credentials
+        run: |
+          docker run --rm -v "$PWD:/src:ro" \
+            -e GIT_CONFIG_COUNT=1 \
+            -e GIT_CONFIG_KEY_0=safe.directory \
+            -e GIT_CONFIG_VALUE_0=/src \
+            zricethezav/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f \
+            git /src --log-opts="--all --full-history" --ignore-gitleaks-allow \
+            --gitleaks-ignore-path=/dev/null --redact=100 --no-banner
